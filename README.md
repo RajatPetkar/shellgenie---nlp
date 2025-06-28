@@ -137,8 +137,3 @@ Pull requests and issues are welcome! If you love voice interfaces, CLI tools, o
 MIT License — use it freely, modify, and share with credits.
 
 👨‍💻 Built with ❤️ by Rajat Petkar
-
-Let me know if you'd like:
-- A project badge section
-- A cool logo or banner
-- GitHub Pages documentation setup
