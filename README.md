@@ -27,17 +27,55 @@ No need to remember terminal syntax — just say it like a human.
 
 ## 📦 Installation
 
-### 1. Clone the repo
-git clone https://github.com/your-username/shellgenie.git
-cd shellgenie
+### ✅ Step-by-Step Terminal Setup for shellgenie
+- ⚠️ Assumes you're on Windows and using Python 3.x (with py command available).
 
-### 2. Install required packages
-pip install requests speechrecognition pyttsx3
-ℹ️ If pip is missing, run:
+### 🧩 Step 1: Prepare Directory
+- mkdir "$env:USERPROFILE\Scripts"
+- copy "C:\Your\Path\To\nlp-shell.py" "$env:USERPROFILE\Scripts\nlp-shell.py"
+- Replace the path if your script is elsewhere.
+
+### 🧾 Step 2: Create a Batch Wrapper
+- $batch = '@echo off
+py "%USERPROFILE%\Scripts\nlp-shell.py" %*'
+$batch | Out-File -FilePath "$env:USERPROFILE\Scripts\nlp.bat" -Encoding ascii
+
+### 🛣️ Step 3: Add Scripts to PATH (if not already)
+
+$currentPath = [Environment]::GetEnvironmentVariable("Path", "User")
+if ($currentPath -notlike "*$env:USERPROFILE\Scripts*") {
+    $newPath = "$currentPath;$env:USERPROFILE\Scripts"
+    [Environment]::SetEnvironmentVariable("Path", $newPath, "User")
+    Write-Host "✅ Added to PATH. Please restart terminal."
+}
+
+### 🐍 Step 4: Ensure Python & Pip Work
+Check if Python & Pip are available:
+py --version
 py -m ensurepip --upgrade
 
-### 3. Set up your API key
-py nlp-shell.py --setup
+### 📦 Step 5: Install Python Dependencies
+- py -m pip install requests speechrecognition pyttsx3
+- If any of these fail, install pip first:
+- py -m ensurepip --default-pip'
+  
+### ⚙️ Step 6: Run Initial Setup for API Key
+- nlp --setup
+- Enter your Gemini API key (from https://makersuite.google.com/app/apikey) when prompted.
+
+### 🎤 Step 7: Run Voice or Text Commands
+** Text mode:
+- nlp "list all files"
+  
+** Voice mode:
+- nlp --voice
+
+- ✨ You can also use --no-confirm to skip prompt and auto-run the command.
+
+🧪 Test It Works
+Try saying or typing:
+what's my ip
+You should see the AI-generated shell command and hear it via voice.
 
 ### ⚡ Usage
 👉 Text query (default mode)
